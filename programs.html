@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IronCore Fitness - Programs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ===== PROGRAMS PAGE STYLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #f8f9fc;
+            color: #1a1a2e;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ----- HEADER ----- */
+        header {
+            background: #0f0f1f;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .logo i {
+            color: #e63946;
+            margin-right: 8px;
+        }
+
+        .logo span {
+            color: #e63946;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links li a {
+            color: #b0b0c8;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            display: block;
+        }
+
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            background: #e63946;
+            color: #fff;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 28px;
+            height: 3px;
+            background: #fff;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        /* ----- PAGE HEADER ----- */
+        .page-header {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: #fff;
+            padding: 60px 0 40px;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 2.8rem;
+        }
+
+        .page-header h1 span {
+            color: #e63946;
+        }
+
+        .page-header p {
+            color: #b0b0c8;
+            font-size: 1.1rem;
+            margin-top: 8px;
+        }
+
+        /* ----- FILTER BUTTONS ----- */
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 30px 0 40px;
+        }
+
+        .filter-btn {
+            padding: 10px 28px;
+            border: 2px solid #ddd;
+            border-radius: 50px;
+            background: #fff;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            color: #555;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: #e63946;
+            color: #fff;
+            border-color: #e63946;
+        }
+
+        /* ----- PROGRAMS GRID ----- */
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            padding-bottom: 60px;
+        }
+
+        .program-card {
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+        }
+
+        .program-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .program-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .program-info {
+            padding: 25px;
+        }
+
+        .program-info h3 {
+            color: #1a1a2e;
+            margin-bottom: 8px;
+        }
+
+        .program-info p {
+            color: #6c6c8a;
+            margin-bottom: 15px;
+        }
+
+        .program-info ul {
+            list-style: none;
+            margin-bottom: 15px;
+        }
+
+        .program-info ul li {
+            display: inline-block;
+            margin-right: 20px;
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        .program-info ul li i {
+            color: #e63946;
+            margin-right: 5px;
+        }
+
+        .program-card.hidden {
+            display: none;
+        }
+
+        /* ----- BUTTONS ----- */
+        .btn-secondary {
+            display: inline-block;
+            background: transparent;
+            color: #e63946;
+            padding: 10px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: 2px solid #e63946;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: #e63946;
+            color: #fff;
+        }
+
+        /* ----- FOOTER ----- */
+        footer {
+            background: #0f0f1f;
+            color: #b0b0c8;
+            padding: 40px 0 20px;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #222;
+        }
+
+        .footer-section h3,
+        .footer-section h4 {
+            color: #fff;
+            margin-bottom: 15px;
+        }
+
+        .footer-section p {
+            color: #b0b0c8;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-section ul li a {
+            color: #b0b0c8;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .footer-section ul li a:hover {
+            color: #e63946;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            width: 40px;
+            height: 40px;
+            background: #1f1f3a;
+            color: #b0b0c8;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: #e63946;
+            color: #fff;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            font-size: 0.9rem;
+            color: #5a5a7a;
+        }
+
+        /* ----- RESPONSIVE ----- */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background: #1a1a2e;
+                padding: 20px;
+                border-radius: 16px;
+                margin-top: 15px;
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-links li a {
+                text-align: center;
+                padding: 12px;
+                border-radius: 10px;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .programs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-dumbbell"></i>
+                <span>IronCore</span> Fitness
+            </div>
+            <nav>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="programs.html" class="active">Programs</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ===== PAGE HEADER ===== -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Our <span>Programs</span></h1>
+            <p>Find the perfect training program for your fitness goals</p>
+        </div>
+    </section>
+
+    <!-- ===== FILTER & PROGRAMS ===== -->
+    <section class="container">
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">All Programs</button>
+            <button class="filter-btn" data-filter="cardio">Cardio</button>
+            <button class="filter-btn" data-filter="strength">Strength</button>
+            <button class="filter-btn" data-filter="flexibility">Flexibility</button>
+            <button class="filter-btn" data-filter="personal">Personal Training</button>
+        </div>
+
+        <div class="programs-grid" id="programsGrid">
+            <div class="program-card" data-category="cardio">
+                <img src="images/cardio.jpg" alt="Cardio Blast">
+                <div class="program-info">
+                    <h3>Cardio Blast</h3>
+                    <p>High-intensity cardio workouts to boost endurance and burn fat.</p>
+                    <ul>
+                        <li><i class="fas fa-clock"></i> 45 min sessions</li>
+                        <li><i class="fas fa-level-up-alt"></i> All levels</li>
+                    </ul>
+                    <a href="contact.html" class="btn-secondary">Enroll Now</a>
+                </div>
+            </div>
+
+            <div class="program-card" data-category="strength">
+                <img src="images/strength workout.jpg" alt="Strength Training">
+                <div class="program-info">
+                    <h3>Strength Training</h3>
+                    <p>Build muscle and increase strength with progressive overload techniques.</p>
+                    <ul>
+                        <li><i class="fas fa-clock"></i> 60 min sessions</li>
+                        <li><i class="fas fa-level-up-alt"></i> Intermediate+</li>
+                    </ul>
+                    <a href="contact.html" class="btn-secondary">Enroll Now</a>
+                </div>
+            </div>
+
+            <div class="program-card" data-category="flexibility">
+                <img src="images/yoga.jpg" alt="Yoga">
+                <div class="program-info">
+                    <h3>Yoga & Flexibility</h3>
+                    <p>Improve mobility, reduce stress, and find your inner balance.</p>
+                    <ul>
+                        <li><i class="fas fa-clock"></i> 60 min sessions</li>
+                        <li><i class="fas fa-level-up-alt"></i> All levels</li>
+                    </ul>
+                    <a href="contact.html" class="btn-secondary">Enroll Now</a>
+                </div>
+            </div>
+
+            <div class="program-card" data-category="personal">
+                <img src="images/persnol trainer.jpg" alt="Personal Training">
+                <div class="program-info">
+                    <h3>Personal Training</h3>
+                    <p>One-on-one coaching with certified professionals for maximum results.</p>
+                    <ul>
+                        <li><i class="fas fa-clock"></i> 60 min sessions</li>
+                        <li><i class="fas fa-level-up-alt"></i> Customized</li>
+                    </ul>
+                    <a href="contact.html" class="btn-secondary">Enroll Now</a>
+                </div>
+            </div>
+
+            <div class="program-card" data-category="cardio">
+                <img src="images/hitt training.jpg" alt="HIIT">
+                <div class="program-info">
+                    <h3>HIIT Training</h3>
+                    <p>Maximum calorie burn in minimum time with high-intensity intervals.</p>
+                    <ul>
+                        <li><i class="fas fa-clock"></i> 30 min sessions</li>
+                        <li><i class="fas fa-level-up-alt"></i> Advanced</li>
+                    </ul>
+                    <a href="contact.html" class="btn-secondary">Enroll Now</a>
+                </div>
+            </div>
+
+            <div class="program-card" data-category="strength">
+                <img src="images/crossfit.jpg" alt="CrossFit">
+                <div class="program-info">
+                    <h3>CrossFit</h3>
+                    <p>Functional fitness that combines strength, cardio, and agility.</p>
+                    <ul>
+                        <li><i class="fas fa-clock"></i> 60 min sessions</li>
+                        <li><i class="fas fa-level-up-alt"></i> All levels</li>
+                    </ul>
+                    <a href="contact.html" class="btn-secondary">Enroll Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>IronCore Fitness</h3>
+                    <p>Building stronger bodies and minds since 2020.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="programs.html">Programs</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-envelope"></i> info@ironcore.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Fitness Ave, NY</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Hours</h4>
+                    <p>Mon-Fri: 5:00 AM - 11:00 PM</p>
+                    <p>Sat-Sun: 6:00 AM - 9:00 PM</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 IronCore Fitness. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        // Hamburger Menu
+        document.getElementById('hamburger').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('open');
+        });
+
+        // Filter Functionality
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const programCards = document.querySelectorAll('.program-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Update active button
+                filterBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+
+                const filter = this.getAttribute('data-filter');
+
+                programCards.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.classList.remove('hidden');
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

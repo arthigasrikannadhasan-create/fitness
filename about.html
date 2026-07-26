@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IronCore Fitness - About</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ===== ABOUT PAGE STYLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #f8f9fc;
+            color: #1a1a2e;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ----- HEADER ----- */
+        header {
+            background: #0f0f1f;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .logo i {
+            color: #e63946;
+            margin-right: 8px;
+        }
+
+        .logo span {
+            color: #e63946;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links li a {
+            color: #b0b0c8;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            display: block;
+        }
+
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            background: #e63946;
+            color: #fff;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 28px;
+            height: 3px;
+            background: #fff;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        /* ----- PAGE HEADER ----- */
+        .page-header {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: #fff;
+            padding: 60px 0 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .page-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #e63946, #ff6b6b, #e63946);
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+        }
+
+        .page-header h1 span {
+            color: #e63946;
+        }
+
+        .page-header p {
+            color: #b0b0c8;
+            font-size: 1.2rem;
+            margin-top: 8px;
+        }
+
+        /* ----- SECTION TITLES ----- */
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 10px;
+            color: #1a1a2e;
+        }
+
+        .section-title span {
+            color: #e63946;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #6c6c8a;
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+        }
+
+        /* ----- BUTTONS ----- */
+        .btn-secondary {
+            display: inline-block;
+            background: transparent;
+            color: #e63946;
+            padding: 10px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: 2px solid #e63946;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: #e63946;
+            color: #fff;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: #e63946;
+            color: #fff;
+            padding: 14px 36px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #c62836;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(230, 57, 70, 0.3);
+        }
+
+        /* ----- ABOUT STORY ----- */
+        .about-story {
+            padding: 70px 0 50px;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2.4rem;
+            margin-bottom: 20px;
+            color: #1a1a2e;
+        }
+
+        .about-text h2 span {
+            color: #e63946;
+        }
+
+        .about-text p {
+            color: #555;
+            margin-bottom: 15px;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* ----- MISSION & VISION ----- */
+        .mission-vision {
+            background: #f0f2f8;
+            padding: 70px 0;
+        }
+
+        .mv-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .mv-card {
+            background: #fff;
+            padding: 40px 35px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s;
+            border-top: 4px solid #e63946;
+        }
+
+        .mv-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .mv-card i {
+            font-size: 3.5rem;
+            color: #e63946;
+            margin-bottom: 20px;
+        }
+
+        .mv-card h3 {
+            font-size: 1.8rem;
+            color: #1a1a2e;
+            margin-bottom: 15px;
+        }
+
+        .mv-card p {
+            color: #555;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        /* ----- VALUES ----- */
+        .values-section {
+            padding: 70px 0;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+        }
+
+        .value-card {
+            text-align: center;
+            padding: 30px 20px;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            border: 1px solid #eee;
+        }
+
+        .value-card:hover {
+            transform: translateY(-6px);
+            border-color: #e63946;
+            box-shadow: 0 10px 30px rgba(230, 57, 70, 0.1);
+        }
+
+        .value-card .icon-circle {
+            width: 70px;
+            height: 70px;
+            background: #ffebee;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+        }
+
+        .value-card .icon-circle i {
+            font-size: 2rem;
+            color: #e63946;
+        }
+
+        .value-card h4 {
+            font-size: 1.2rem;
+            color: #1a1a2e;
+            margin-bottom: 8px;
+        }
+
+        .value-card p {
+            color: #6c6c8a;
+            font-size: 0.95rem;
+        }
+
+        /* ----- TEAM ----- */
+        .team {
+            padding: 70px 0;
+            background: #f8f9fc;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 30px;
+        }
+
+        .team-member {
+            text-align: center;
+            background: #fff;
+            padding: 30px 20px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            border: 1px solid #eee;
+        }
+
+        .team-member:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            border-color: #e63946;
+        }
+
+        .team-member img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 4px solid #e63946;
+        }
+
+        .team-member h3 {
+            color: #1a1a2e;
+            font-size: 1.3rem;
+        }
+
+        .team-member .role {
+            color: #e63946;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin: 5px 0 10px;
+        }
+
+        .team-member p {
+            color: #6c6c8a;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .team-member .social-icons {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .team-member .social-icons a {
+            width: 36px;
+            height: 36px;
+            background: #f0f2f8;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #1a1a2e;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .team-member .social-icons a:hover {
+            background: #e63946;
+            color: #fff;
+        }
+
+        /* ----- ACHIEVEMENTS / STATS ----- */
+        .achievements {
+            background: #0f0f1f;
+            color: #fff;
+            padding: 60px 0;
+        }
+
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .achievement-item h3 {
+            font-size: 3rem;
+            color: #e63946;
+        }
+
+        .achievement-item p {
+            color: #b0b0c8;
+            font-size: 1rem;
+        }
+
+        /* ----- TESTIMONIALS ----- */
+        .testimonials-about {
+            padding: 70px 0;
+            background: #f0f2f8;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid #e63946;
+        }
+
+        .testimonial-card .stars {
+            color: #f7b731;
+            margin-bottom: 10px;
+        }
+
+        .testimonial-card p {
+            font-style: italic;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .testimonial-card h4 {
+            color: #e63946;
+        }
+
+        /* ----- CTA SECTION ----- */
+        .cta-section {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: #fff;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .cta-section h2 span {
+            color: #e63946;
+        }
+
+        .cta-section p {
+            color: #b0b0c8;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ----- FOOTER ----- */
+        footer {
+            background: #0f0f1f;
+            color: #b0b0c8;
+            padding: 40px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #222;
+        }
+
+        .footer-section h3,
+        .footer-section h4 {
+            color: #fff;
+            margin-bottom: 15px;
+        }
+
+        .footer-section p {
+            color: #b0b0c8;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-section ul li a {
+            color: #b0b0c8;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .footer-section ul li a:hover {
+            color: #e63946;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            width: 40px;
+            height: 40px;
+            background: #1f1f3a;
+            color: #b0b0c8;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: #e63946;
+            color: #fff;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            font-size: 0.9rem;
+            color: #5a5a7a;
+        }
+
+        /* ----- BACK TO TOP ----- */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #e63946;
+            color: #fff;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(230, 57, 70, 0.3);
+            transition: all 0.3s;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(230, 57, 70, 0.4);
+        }
+
+        /* ----- RESPONSIVE ----- */
+        @media (max-width: 992px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .mv-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background: #1a1a2e;
+                padding: 20px;
+                border-radius: 16px;
+                margin-top: 15px;
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-links li a {
+                text-align: center;
+                padding: 12px;
+                border-radius: 10px;
+            }
+
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .about-text h2 {
+                font-size: 1.8rem;
+            }
+
+            .mv-card h3 {
+                font-size: 1.5rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .achievements-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .cta-section h2 {
+                font-size: 2rem;
+            }
+
+            .back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .achievements-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 15px;
+            }
+
+            .achievement-item h3 {
+                font-size: 2rem;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-dumbbell"></i>
+                <span>IronCore</span> Fitness
+            </div>
+            <nav>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html" class="active">About</a></li>
+                    <li><a href="programs.html">Programs</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ===== PAGE HEADER ===== -->
+    <section class="page-header">
+        <div class="container">
+            <h1>About <span>Us</span></h1>
+            <p>Discover the story, mission, and people behind IronCore Fitness</p>
+        </div>
+    </section>
+
+    <!-- ===== ABOUT STORY ===== -->
+    <section class="about-story">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-text">
+                    <h2>Our <span>Story</span></h2>
+                    <p>IronCore Fitness was founded in 2020 with a simple mission: to make quality fitness accessible to everyone. What started as a small local gym in the heart of New York has grown into a thriving community of over 5,000 members who are committed to transforming their lives through fitness.</p>
+                    <p>Our founder, Alex Thompson, a former professional athlete, envisioned a space where people of all fitness levels could feel welcome and supported. He believed that fitness should be about more than just physical appearance—it's about building mental strength, discipline, and overall well-being.</p>
+                    <p>Today, IronCore Fitness stands as a testament to that vision. We've expanded to three locations across the city, but we've never lost sight of our core values: community, integrity, and excellence. Our approach combines science-backed training methods with a supportive environment that encourages growth at every stage.</p>
+                    <a href="programs.html" class="btn-primary" style="margin-top: 20px;">Explore Our Programs</a>
+                </div>
+                <div class="about-image">
+                    <img src="images/gym.jpg" width="1000px" alt="Our Gym">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== MISSION & VISION ===== -->
+    <section class="mission-vision">
+        <div class="container">
+            <div class="mv-grid">
+                <div class="mv-card">
+                    <img src="images/mission.jpg" width="300px" alt="Our Mission">
+                    <h3>Our Mission</h3>
+                    <p>To empower individuals to achieve their fitness goals through personalized training, expert guidance, and a supportive community. We strive to make fitness accessible, enjoyable, and sustainable for everyone, regardless of their starting point.</p>
+                </div>
+                <div class="mv-card">
+                   <img src="images/vission.jpg" width="300px" alt="Our Vission">
+                    <h3>Our Vision</h3>
+                    <p>To become the most trusted and inclusive fitness community in the world, where every person feels empowered to transform their life. We envision a future where fitness is a lifestyle, not a chore, and where our members inspire others to join the journey.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CORE VALUES ===== -->
+    <section class="values-section">
+        <div class="container">
+            <h2 class="section-title">Our Core <span>Values</span></h2>
+            <p class="section-subtitle">The principles that guide everything we do at IronCore Fitness</p>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="icon-circle">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h4>Excellence</h4>
+                    <p>We strive for excellence in everything we do — from our training programs to customer service.</p>
+                </div>
+                <div class="value-card">
+                    <div class="icon-circle">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h4>Community</h4>
+                    <p>We build a supportive community where everyone feels welcome, encouraged, and valued.</p>
+                </div>
+                <div class="value-card">
+                    <div class="icon-circle">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h4>Integrity</h4>
+                    <p>We operate with transparency, honesty, and ethical practices in all our interactions.</p>
+                </div>
+                <div class="value-card">
+                    <div class="icon-circle">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h4>Innovation</h4>
+                    <p>We embrace new training methods, technology, and ideas to continuously improve.</p>
+                </div>
+                <div class="value-card">
+                    <div class="icon-circle">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h4>Inclusivity</h4>
+                    <p>We welcome everyone regardless of age, gender, fitness level, or background.</p>
+                </div>
+                <div class="value-card">
+                    <div class="icon-circle">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h4>Growth</h4>
+                    <p>We believe in continuous personal and professional growth for our members and staff.</p>
+                </div>
+                <div class="value-card">
+                    <div class="icon-circle">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h4>Health</h4>
+                    <p>Health of our trainees is our first priority out of all our goals we work hard on their good health and well-being.</p>
+                </div>
+                <div class="value-card">
+                    <div class="icon-circle">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h4>Progress</h4>
+                    <p>We work hard on our trainess progress instead of fast progress we focus on slow, steady and healthy progress.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TEAM ===== -->
+    <section class="team">
+        <div class="container">
+            <h2 class="section-title">Meet Our <span>Team</span></h2>
+            <p class="section-subtitle">Passionate professionals dedicated to helping you succeed</p>
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="images/nick mitchell.webp" alt="Alex Thompson">
+                    <h3>Nick mitchell</h3>
+                    <div class="role">Founder & CEO</div>
+                    <p>British personal trainer with 15+ years of experience in fitness and wellness.</p>
+                    <div class="social-icons">
+                        <a href="https://ae.linkedin.com/in/nick-mitchell-a69b3a1a"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://x.com/HeyNickMitchell"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <img src="images/head trainer.jpg" alt="Sarah Johnson">
+                    <h3>Yasmin Karachiwala</h3>
+                    <div class="role">Head Trainer</div>
+                    <p>Yasmin Karachiwala is a personal fitness trainer for Bollywood and sports celebrities. She was the first BASI pilates instructor in India.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <img src="images/yogatrainer.jpg" alt="Mike Rodriguez">
+                    <h3>Ira Trivedi</h3>
+                    <div class="role">Yoga & Flexibility Coach</div>
+                    <p>Certified yoga instructor with expertise in mobility and injury prevention.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <img src="images/nutritionspecalist.jpg">
+                    <h3>Luke Coutinho</h3>
+                    <div class="role">Nutrition Specialist</div>
+                    <p>Registered dietitian with a passion for helping clients achieve their health goals.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ACHIEVEMENTS ===== -->
+    <section class="achievements">
+        <div class="container">
+            <div class="achievements-grid">
+                <div class="achievement-item">
+                    <h3 class="counter" data-target="5000">0</h3>
+                    <p>Active Members</p>
+                </div>
+                <div class="achievement-item">
+                    <h3 class="counter" data-target="150">0</h3>
+                    <p>Expert Trainers</p>
+                </div>
+                <div class="achievement-item">
+                    <h3 class="counter" data-target="200">0</h3>
+                    <p>Programs Offered</p>
+                </div>
+                <div class="achievement-item">
+                    <h3 class="counter" data-target="98">0</h3>
+                    <p>Member Satisfaction %</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TESTIMONIALS ===== -->
+    <section class="testimonials-about">
+        <div class="container">
+            <h2 class="section-title">What Our <span>Members Say</span></h2>
+            <p class="section-subtitle">Real stories from real people who transformed their lives with us</p>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p>"IronCore completely transformed my approach to fitness. The trainers are incredible and the community is so supportive. I've never felt stronger!"</p>
+                    <h4>- Sarah Johnson</h4>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p>"I've lost 30 pounds and gained so much confidence. The personalized programs and nutrition guidance made all the difference. Best decision I ever made."</p>
+                    <h4>- Mike Thompson</h4>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p>"The community here is unlike any other. I actually look forward to working out! The trainers genuinely care about your progress."</p>
+                    <h4>- Emily Rodriguez</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA SECTION ===== -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Start Your <span>Journey</span>?</h2>
+            <p>Join thousands of members who have transformed their lives with IronCore Fitness. Your transformation starts today.</p>
+            <a href="contact.html" class="btn-primary">Get Started Now</a>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>IronCore Fitness</h3>
+                    <p>Building stronger bodies and minds since 2020.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="programs.html">Programs</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-envelope"></i> info@ironcore.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Fitness Ave, NY</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Hours</h4>
+                    <p>Mon-Fri: 5:00 AM - 11:00 PM</p>
+                    <p>Sat-Sun: 6:00 AM - 9:00 PM</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 IronCore Fitness. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== BACK TO TOP BUTTON ===== -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        // Hamburger Menu
+        document.getElementById('hamburger').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('open');
+        });
+
+        // Counter Animation
+        const counters = document.querySelectorAll('.counter');
+        const speed = 100;
+
+        function animateCounter(counter) {
+            const target = parseInt(counter.getAttribute('data-target'));
+            let current = 0;
+            const increment = target / speed;
+
+            const updateCounter = () => {
+                current += increment;
+                if (current >= target) {
+                    counter.textContent = target + (target === 98 ? '%' : '+');
+                    return;
+                }
+                counter.textContent = Math.floor(current) + '+';
+                requestAnimationFrame(updateCounter);
+            };
+            updateCounter();
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    animateCounter(counter);
+                    observer.unobserve(counter);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        counters.forEach(c => observer.observe(c));
+
+        // Back to Top Button
+        const backToTopBtn = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+
+</body>
+</html>

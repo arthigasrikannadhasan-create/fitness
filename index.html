@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IronCore Fitness - Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        /* ===== HOME PAGE STYLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #f8f9fc;
+            color: #1a1a2e;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ----- HEADER ----- */
+        header {
+            background: #0f0f1f;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .logo i {
+            color: #e63946;
+            margin-right: 8px;
+        }
+
+        .logo span {
+            color: #e63946;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links li a {
+            color: #b0b0c8;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            display: block;
+        }
+
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            background: #e63946;
+            color: #fff;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 28px;
+            height: 3px;
+            background: #fff;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        /* ----- BUTTONS ----- */
+        .btn-primary {
+            display: inline-block;
+            background: #e63946;
+            color: #fff;
+            padding: 14px 36px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #c62836;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(230, 57, 70, 0.3);
+        }
+
+        .btn-secondary {
+            display: inline-block;
+            background: transparent;
+            color: #e63946;
+            padding: 10px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: 2px solid #e63946;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: #e63946;
+            color: #fff;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 10px;
+            color: #1a1a2e;
+        }
+
+        .section-title span {
+            color: #e63946;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #6c6c8a;
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+        }
+
+        /* ----- HERO SLIDER ----- */
+        .hero-slider {
+            position: relative;
+            height: 80vh;
+            min-height: 500px;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #0f0f1f 0%, #1a1a2e 50%, #16213e 100%);
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide:nth-child(2) {
+            background: linear-gradient(135deg, #1a0a0a, #2e1a1a, #3e1a13);
+        }
+
+        .slide:nth-child(3) {
+            background: linear-gradient(135deg, #0a1a0a, #1a2e1a, #133e13);
+        }
+
+        .slide-content {
+            max-width: 700px;
+            padding: 20px;
+        }
+
+        .slide-content h1 {
+            font-size: 3.5rem;
+            color: #fff;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        .slide-content h1 span {
+            color: #e63946;
+        }
+
+        .slide-content p {
+            color: #b0b0c8;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .slider-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            pointer-events: none;
+        }
+
+        .slider-controls button {
+            pointer-events: auto;
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            color: #fff;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            backdrop-filter: blur(5px);
+        }
+
+        .slider-controls button:hover {
+            background: #e63946;
+        }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+        }
+
+        .slider-dots .dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .slider-dots .dot.active {
+            background: #e63946;
+            transform: scale(1.2);
+        }
+
+        /* ----- STATS ----- */
+        .stats {
+            background: #0f0f1f;
+            color: #fff;
+            padding: 50px 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 3rem;
+            color: #e63946;
+        }
+
+        .stat-item p {
+            color: #b0b0c8;
+            font-size: 1rem;
+        }
+
+        /* ----- SERVICES ----- */
+        .services {
+            padding: 60px 0;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: #fff;
+            padding: 30px 25px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            border: 1px solid #eee;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(230, 57, 70, 0.15);
+            border-color: #e63946;
+        }
+
+        .service-card i {
+            font-size: 3rem;
+            color: #e63946;
+            margin-bottom: 15px;
+        }
+
+        .service-card h3 {
+            margin-bottom: 10px;
+            color: #1a1a2e;
+        }
+
+        .service-card p {
+            color: #6c6c8a;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        /* ----- TESTIMONIALS ----- */
+        .testimonials {
+            background: #f0f2f8;
+            padding: 60px 0;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid #e63946;
+        }
+
+        .testimonial-card p {
+            font-style: italic;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .testimonial-card h4 {
+            color: #e63946;
+        }
+
+        /* ----- FOOTER ----- */
+        footer {
+            background: #0f0f1f;
+            color: #b0b0c8;
+            padding: 40px 0 20px;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #222;
+        }
+
+        .footer-section h3,
+        .footer-section h4 {
+            color: #fff;
+            margin-bottom: 15px;
+        }
+
+        .footer-section p {
+            color: #b0b0c8;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-section ul li a {
+            color: #b0b0c8;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .footer-section ul li a:hover {
+            color: #e63946;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            width: 40px;
+            height: 40px;
+            background: #1f1f3a;
+            color: #b0b0c8;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: #e63946;
+            color: #fff;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            font-size: 0.9rem;
+            color: #5a5a7a;
+        }
+
+        /* ----- RESPONSIVE ----- */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background: #1a1a2e;
+                padding: 20px;
+                border-radius: 16px;
+                margin-top: 15px;
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-links li a {
+                text-align: center;
+                padding: 12px;
+                border-radius: 10px;
+            }
+
+            .hero-slider {
+                height: 60vh;
+                min-height: 400px;
+            }
+
+            .slide-content h1 {
+                font-size: 2rem;
+            }
+
+            .slider-controls button {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+
+            .stat-item h3 {
+                font-size: 2rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-dumbbell"></i>
+                <span>IronCore</span> Fitness
+            </div>
+            <nav>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="programs.html">Programs</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ===== HERO SLIDER ===== -->
+    <section class="hero-slider" id="heroSlider">
+        <div class="slide active">
+            <div class="slide-content">
+                <h1>Transform Your <span>Body</span></h1>
+                <img src="images/transform.jpg" width="500px" height="250px"<br>
+                <p>Expert coaching, state-of-the-art equipment, and a community that pushes you to be your best.</p>
+                <a href="contact.html" class="btn-primary">Start Your Journey</a>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="slide-content">
+                <h1>Personalized <span>Training</span></h1>
+                <img src="images/persnol trainer.jpg" width="500px" height="250px"<br>
+                <p>Custom workout plans tailored to your goals, fitness level, and schedule.</p>
+                <a href="contact.html" class="btn-primary">Book a Session</a>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="slide-content">
+                <h1>Community <span>Strong</span></h1>
+                <img src="images/community.jpg" width="500px" height="250px"<br>
+                <p>Join thousands of members who've transformed their lives through fitness.</p>
+                <a href="contact.html" class="btn-primary">Join the community</a>
+            </div>
+        </div>
+        <div class="slider-controls">
+            <button class="prev" id="sliderPrev"><i class="fas fa-chevron-left"></i></button>
+            <button class="next" id="sliderNext"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <div class="slider-dots" id="sliderDots">
+            <span class="dot active" data-index="0"></span>
+            <span class="dot" data-index="1"></span>
+            <span class="dot" data-index="2"></span>
+        </div>
+    </section>
+
+    <!-- ===== STATS ===== -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3 class="counter" data-target="5000">0</h3>
+                    <p>Active Members</p>
+                </div>
+                <div class="stat-item">
+                    <h3 class="counter" data-target="150">0</h3>
+                    <p>Expert Trainers</p>
+                </div>
+                <div class="stat-item">
+                    <h3 class="counter" data-target="200">0</h3>
+                    <p>Programs Offered</p>
+                </div>
+                <div class="stat-item">
+                    <h3 class="counter" data-target="98">0</h3>
+                    <p>Member Satisfaction %</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SERVICES ===== -->
+    <section class="services">
+        <div class="container">
+            <h2 class="section-title">Our <span>Programs</span></h2>
+            <p class="section-subtitle">Choose from a variety of training programs designed for every fitness level</p>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fas fa-heartbeat"></i>
+                    <h3>Cardio Blast</h3>
+                    <img src="images/cardio.jpg" width="225px"<br>
+                    <p>High-intensity cardio workouts to boost endurance and burn fat.</p>
+                    <a href="programs.html" class="btn-secondary">Learn More</a>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-weight-hanging"></i>
+                    <h3>Strength Training</h3>
+                     <img src="images/strength workout.jpg" width="225px"<br>
+                    <p>Build muscle and increase strength with progressive overload techniques.</p>
+                    <a href="programs.html" class="btn-secondary">Learn More</a>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-spa"></i>
+                    <h3>Yoga & Flexibility</h3>
+                    <img src="images/yoga.jpg" width="225px"<br>
+                    <p>Improve mobility, reduce stress, and find your inner balance.</p>
+                    <a href="programs.html" class="btn-secondary">Learn More</a>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-user-nurse"></i>
+                    <h3>Personal Training</h3>
+                    <img src="images/persnol trainer.jpg" width="225px"<br>
+                    <p>One-on-one coaching with certified professionals for maximum results.</p>
+                    <a href="programs.html" class="btn-secondary">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TESTIMONIALS ===== -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our <span>Members Say</span></h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <p>"IronCore completely transformed my approach to fitness. The trainers are incredible!"</p>
+                    <h4>- Sarah Johnson</h4>
+                </div>
+                <div class="testimonial-card">
+                    <p>"I've lost 30 pounds and gained so much confidence. Best decision I ever made."</p>
+                    <h4>- Mike Thompson</h4>
+                </div>
+                <div class="testimonial-card">
+                    <p>"The community here is unlike any other. I actually look forward to working out!"</p>
+                    <h4>- Emily Rodriguez</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>IronCore Fitness</h3>
+                    <p>Building stronger bodies and minds since 2020.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="programs.html">Programs</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-envelope"></i> info@ironcore.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Fitness Ave, NY</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Hours</h4>
+                    <p>Mon-Fri: 5:00 AM - 11:00 PM</p>
+                    <p>Sat-Sun: 6:00 AM - 9:00 PM</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 IronCore Fitness. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        // Hamburger Menu
+        document.getElementById('hamburger').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('open');
+        });
+
+        // Hero Slider
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        const totalSlides = slides.length;
+
+        function goToSlide(index) {
+            slides.forEach(s => s.classList.remove('active'));
+            dots.forEach(d => d.classList.remove('active'));
+            currentSlide = (index + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+        }
+
+        document.getElementById('sliderPrev').addEventListener('click', () => goToSlide(currentSlide - 1));
+        document.getElementById('sliderNext').addEventListener('click', () => goToSlide(currentSlide + 1));
+
+        dots.forEach((dot, i) => {
+            dot.addEventListener('click', () => goToSlide(i));
+        });
+
+        // Auto-slide
+        setInterval(() => goToSlide(currentSlide + 1), 5000);
+
+        // Counter Animation
+        const counters = document.querySelectorAll('.counter');
+        const speed = 100;
+
+        function animateCounter(counter) {
+            const target = parseInt(counter.getAttribute('data-target'));
+            let current = 0;
+            const increment = target / speed;
+
+            const updateCounter = () => {
+                current += increment;
+                if (current >= target) {
+                    counter.textContent = target + (target === 98 ? '%' : '+');
+                    return;
+                }
+                counter.textContent = Math.floor(current) + '+';
+                requestAnimationFrame(updateCounter);
+            };
+            updateCounter();
+        }
+
+        // Trigger counters when visible
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    animateCounter(counter);
+                    observer.unobserve(counter);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        counters.forEach(c => observer.observe(c));
+    </script>
+
+</body>
+</html>
